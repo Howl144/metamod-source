@@ -34,6 +34,7 @@ SH_DECL_HOOK1_void(IServerGameClients, ClientCommand, SH_NOATTRIB, 0, edict_t *)
 #endif
 
 SamplePlugin g_SamplePlugin;
+IServerGameEnts* gameents;
 IServerGameDLL *server = NULL;
 IServerGameClients *gameclients = NULL;
 IVEngineServer *engine = NULL;
@@ -43,6 +44,7 @@ IServerPluginCallbacks *vsp_callbacks = NULL;
 IPlayerInfoManager *playerinfomanager = NULL;
 ICvar *icvar = NULL;
 CGlobalVars *gpGlobals = NULL;
+
 
 ConVar sample_cvar("sample_cvar", "42", 0);
 
@@ -68,6 +70,7 @@ bool SamplePlugin::Load(PluginId id, ISmmAPI *ismm, char *error, size_t maxlen, 
 	GET_V_IFACE_CURRENT(GetEngineFactory, gameevents, IGameEventManager2, INTERFACEVERSION_GAMEEVENTSMANAGER2);
 	GET_V_IFACE_CURRENT(GetEngineFactory, helpers, IServerPluginHelpers, INTERFACEVERSION_ISERVERPLUGINHELPERS);
 	GET_V_IFACE_CURRENT(GetEngineFactory, icvar, ICvar, CVAR_INTERFACE_VERSION);
+	GET_V_IFACE_ANY(GetServerFactory, gameents, IServerGameEnts, INTERFACEVERSION_SERVERGAMEENTS);
 	GET_V_IFACE_ANY(GetServerFactory, server, IServerGameDLL, INTERFACEVERSION_SERVERGAMEDLL);
 	GET_V_IFACE_ANY(GetServerFactory, gameclients, IServerGameClients, INTERFACEVERSION_SERVERGAMECLIENTS);
 	GET_V_IFACE_ANY(GetServerFactory, playerinfomanager, IPlayerInfoManager, INTERFACEVERSION_PLAYERINFOMANAGER);
@@ -343,12 +346,12 @@ const char *SamplePlugin::GetAuthor()
 
 const char *SamplePlugin::GetDescription()
 {
-	return "Sample basic plugin";
+	return "test1";
 }
 
 const char *SamplePlugin::GetName()
 {
-	return "Sample Plugin";
+	return "VSP-Plugin";
 }
 
 const char *SamplePlugin::GetURL()
